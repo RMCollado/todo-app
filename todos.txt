@@ -6,3 +6,4 @@ Study
 make pizza
 Clean Room
 Get better
+Pick up kids
