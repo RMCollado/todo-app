@@ -9,13 +9,16 @@ list_box = Sg.Listbox(
     enable_events=True, size=(45, 10)
 )
 edit_button = Sg.Button("Edit")
+complete_button = Sg.Button("Complete")
+exit_button = Sg.Button("Exit")
 
 FONT = ('helvetica', 15)
 
 LAYOUT = [
     [label],
     [input_box, add_button],
-    [list_box, edit_button]
+    [list_box, edit_button, complete_button],
+    [exit_button]
 ]
 
 window = Sg.Window(
@@ -44,6 +47,17 @@ while True:
             todos[index] = new_todo + '\n'
             functions.write_todos(todos)
             window['todos'].update(values=todos)
+
+        case 'Complete':
+            todo_to_complete = values['todos'][0]
+            todos = functions.get_todos()
+            todos.remove(todo_to_complete)
+            functions.write_todos(todos)
+            window['todos'].update(values=todos)
+            window['todo'].update(value="")
+
+        case 'Exit':
+            break
 
         case 'todos':
             window['todo'].update(value=values['todos'][0])
